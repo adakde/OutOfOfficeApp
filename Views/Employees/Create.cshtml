@@ -1,0 +1,23 @@
+﻿@model Employee
+
+<h2>Dodaj/Edytuj pracownika</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Subdivision"></label>
+        <input asp-for="Subdivision" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Position"></label>
+        <input asp-for="Position" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+</form>
