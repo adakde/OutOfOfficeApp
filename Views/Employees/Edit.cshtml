@@ -1,0 +1,59 @@
+﻿@model OutOfOffice.Models.Employee
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<h1>Edit Employee</h1>
+
+<h4>Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subdivision" class="control-label"></label>
+                <input asp-for="Subdivision" class="form-control" />
+                <span asp-validation-for="Subdivision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Position" class="control-label"></label>
+                <input asp-for="Position" class="form-control" />
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PeoplePartnerId" class="control-label"></label>
+                <select asp-for="PeoplePartnerId" class="form-control" asp-items="ViewBag.PeoplePartnerId"></select>
+                <span asp-validation-for="PeoplePartnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutOfOfficeBalance" class="control-label"></label>
+                <input asp-for="OutOfOfficeBalance" class="form-control" />
+                <span asp-validation-for="OutOfOfficeBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
