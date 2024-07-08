@@ -51,13 +51,21 @@ public class LeaveRequestsController : Controller
     // POST: LeaveRequests/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ID,EmployeeId,StartDate,EndDate,Reason,Status")] LeaveRequest leaveRequest)
+    public async Task<IActionResult> Create([Bind("ID,EmployeeId,StartDate,EndDate,AbsenceReason,Status")] LeaveRequest leaveRequest)
     {
         if (ModelState.IsValid)
         {
-            _context.Add(leaveRequest);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                _context.Add(leaveRequest);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Dodaj logowanie błędów tutaj
+                ModelState.AddModelError("", $"Error: {ex.Message}");
+            }
         }
         ViewData["EmployeeId"] = new SelectList(_context.Employees, "ID", "FullName", leaveRequest.EmployeeId);
         return View(leaveRequest);
