@@ -74,7 +74,6 @@ public class EmployeesController : Controller
         {
             return NotFound();
         }
-        ViewData["PeoplePartnerId"] = new SelectList(_context.Employees, "ID", "FullName", employee.PeoplePartnerId);
         return View(employee);
     }
 
@@ -108,7 +107,6 @@ public class EmployeesController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
-        ViewData["PeoplePartnerId"] = new SelectList(_context.Employees, "ID", "FullName", employee.PeoplePartnerId);
         return View(employee);
     }
 
