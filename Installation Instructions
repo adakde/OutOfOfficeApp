@@ -1,0 +1,98 @@
+Prerequisites
+.NET Core SDK installed on your machine.
+SQL Server or another compatible database setup.
+Setting Up the Database
+Create the Database:
+Open SQL Server Management Studio or your preferred SQL management tool.
+Run the SQL script provided in the repository to create the necessary tables and relationships.
+sql
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY IDENTITY,
+    FullName NVARCHAR(100) NOT NULL,
+    Subdivision NVARCHAR(100) NOT NULL,
+    Position NVARCHAR(100) NOT NULL,
+    Status NVARCHAR(50) NOT NULL,
+    PeoplePartnerId INT,
+    OutOfOfficeBalance INT NOT NULL,
+    Photo NVARCHAR(MAX)
+);
+
+CREATE TABLE LeaveRequests (
+    ID INT PRIMARY KEY IDENTITY,
+    EmployeeId INT FOREIGN KEY REFERENCES Employees(ID),
+    AbsenceReason NVARCHAR(100) NOT NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    Comment NVARCHAR(MAX),
+    Status NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ApprovalRequests (
+    ID INT PRIMARY KEY IDENTITY,
+    ApproverId INT FOREIGN KEY REFERENCES Employees(ID),
+    LeaveRequestId INT FOREIGN KEY REFERENCES LeaveRequests(ID),
+    Status NVARCHAR(50) NOT NULL,
+    Comment NVARCHAR(MAX)
+);
+
+CREATE TABLE Projects (
+    ID INT PRIMARY KEY IDENTITY,
+    ProjectType NVARCHAR(100) NOT NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE,
+    ProjectManagerId INT FOREIGN KEY REFERENCES Employees(ID),
+    Comment NVARCHAR(MAX),
+    Status NVARCHAR(50) NOT NULL
+);
+Update Connection String:
+Open the appsettings.json file in the project.
+Update the connection string to point to your database.
+json
+Skopiuj kod
+"ConnectionStrings": {
+    "DefaultConnection": "Server=your_server;Database=your_database;User Id=your_username;Password=your_password;"
+}
+Running the Application
+Build the Application:
+Open a command prompt or terminal.
+Navigate to the project directory.
+Run the following command to build the application:
+bash
+dotnet build
+Run the Application:
+Run the following command to start the application:
+bash
+dotnet run
+Access the Application:
+Open a web browser.
+Navigate to https://localhost:7295 (or the URL specified in the launch settings).
+Using the Application
+Log in:
+
+Use the provided credentials to log in. (For demo purposes, you might use predefined users in the database.)
+Navigating the Application:
+
+Use the navigation menu to access Employees, Leave Requests, Approval Requests, and Projects.
+Common Tasks
+Adding a New Employee
+Navigate to the Employees list.
+Click the "Create" button.
+Fill in the employee details and click "Save".
+Submitting a Leave Request
+Navigate to Leave Requests.
+Click the "Create" button.
+Fill in the leave request details and click "Submit".
+Approving a Leave Request
+Navigate to Approval Requests.
+Click on the request to view details.
+Click "Approve" or "Reject" and provide a comment if necessary.
+Troubleshooting
+If you encounter any issues while running the application:
+
+Check the Console for Errors:
+Look at the browser's developer console for any JavaScript errors.
+Verify Database Connection:
+Ensure that the connection string in appsettings.json is correct.
+Review Logs:
+Check the application logs for any error messages.
+For further assistance, please refer to the detailed documentation provided in the repository or contact your IT support team.
