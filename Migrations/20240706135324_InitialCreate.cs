@@ -23,7 +23,8 @@ namespace OutOfOfficeApp.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PeoplePartnerId = table.Column<int>(type: "int", nullable: true),
                     OutOfOfficeBalance = table.Column<int>(type: "int", nullable: false),
-                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+
                 },
                 constraints: table =>
                 {

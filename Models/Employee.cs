@@ -26,4 +26,5 @@ public class Employee
     public int OutOfOfficeBalance { get; set; }
 
     public byte[]? Photo { get; set; } // Optional
+
 }

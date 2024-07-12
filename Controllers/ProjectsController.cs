@@ -41,27 +41,27 @@ public class ProjectsController : Controller
         return View(project);
     }
 
-    // GET: Projects/Create
-    public IActionResult Create()
-    {
-        ViewData["ProjectManagerId"] = new SelectList(_context.Employees, "ID", "FullName");
-        return View();
-    }
+// GET: Projects/Create
+public IActionResult Create()
+{
+    ViewData["ProjectManagerId"] = new SelectList(_context.Employees, "ID", "FullName");
+    return View();
+}
 
-    // POST: Projects/Create
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ID,ProjectType,StartDate,EndDate,ProjectManagerId,Comment,Status")] Project project)
+// POST: Projects/Create
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create([Bind("ID,ProjectType,StartDate,EndDate,ProjectManagerId,Comment,Status")] Project project)
+{
+    if (ModelState.IsValid)
     {
-        if (ModelState.IsValid)
-        {
-            _context.Add(project);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        ViewData["ProjectManagerId"] = new SelectList(_context.Employees, "ID", "FullName", project.ProjectManagerId);
-        return View(project);
+        _context.Add(project);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
+    ViewData["ProjectManagerId"] = new SelectList(_context.Employees, "ID", "FullName", project.ProjectManagerId);
+    return View(project);
+}
 
     // GET: Projects/Edit/5
     public async Task<IActionResult> Edit(int? id)
